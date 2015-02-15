@@ -68,6 +68,7 @@ angular.module('weatherApp')
                // Use the category20() scale function for multicolor support
                color = d3.scale.category10(),
                // our xScale
+              
                yScale = d3.scale.linear()
                  .domain([d3.max(allCities, function(city) {
                    return d3.max(city.history, function(d) { return d.main[scope.activeGraph]; });
@@ -76,12 +77,15 @@ angular.module('weatherApp')
                  })])
                  .range([10, height]),
                // our xScale
+              
+               xMin = d3.min(allCities, function(city) {
+                 return d3.min(city.history, function(d) { return d.dt; });
+               }),
+               xMax =d3.max(allCities, function(city) {
+                 return d3.max(city.history, function(d) { return d.dt; });
+               }), 
                xScale = d3.scale.linear()
-                 .domain([d3.min(allCities, function(city) {
-                   return d3.min(city.history, function(d) { return d.dt; });
-                 }), d3.max(allCities, function(city) {
-                   return d3.max(city.history, function(d) { return d.dt; });
-                 })])
+                 .domain([xMin,xMax ])
                  .range([0, width]);
                
                
@@ -93,18 +97,14 @@ angular.module('weatherApp')
            var xAxis = d3.svg.axis()
                .scale(xScale)
                .orient('bottom')
-               .tickFormat(function(d) { return d3.time.format('%m/%d %H:%M')(new Date(d*1000)); });
+               .tickValues(d3.range(xMin, xMax, 40000))
+               .tickFormat('');
+               //.tickFormat(function(d) { return d3.time.format('%m/%d %H:%M')(new Date(d*1000)); });
            var yAxis = d3.svg.axis()
                .scale(yScale)
                .orient('right')
                .tickFormat(function(d) { return $filter(scope.activeGraph)(d); });
-           svg.append('g')
-              .attr('class', 'axis')
-           		.attr('transform', 'translate(0,' + height + ')')
-           		.call(xAxis);
-           svg.append('g')
-               .attr('class', 'axis')
-               .call(yAxis);
+
            
            //set up the line for the path
            var line = d3.svg.line()
@@ -136,6 +136,25 @@ angular.module('weatherApp')
                    .delay(function(d, i) { return (i / allCities.length) * 1000; })
                    .attr('d', function(d){return line(d.history);});
             $rootScope.$broadcast('color-set');
+            
+            svg.append('g')
+               .attr('class', 'axis')
+            		.attr('transform', 'translate(0,' + height + ')')
+            		.call(xAxis)
+            		.selectAll('text')
+            		.selectAll('tspan')
+            		.data(function (d) {return [d3.time.format('%m/%d')(new Date(d*1000)),d3.time.format('%H:%M')(new Date(d*1000))];  })
+            		.enter()
+            		.append('tspan')
+            		.attr('x', 0)
+            //		.attr('dx', '-1em')
+            		.attr('dy', function (d, i) { return (i==0?'.6em':'1em'); })
+            		.text(String);
+            		
+            		
+            svg.append('g')
+                .attr('class', 'axis')
+                .call(yAxis);
                      
          };
        

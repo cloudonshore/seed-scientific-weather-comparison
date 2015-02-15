@@ -44,7 +44,7 @@ angular.module('weatherApp')
          }
         });
         scope.addCity = function(cityId){
-          cities.cities.push({'id':cityId}); //add new city to the list
+          cities.cities.unshift({'id':cityId}); //add new city to the list
           cities.initializeCityData(); //reinitialize to pull in new data
           scope.query='';
           scope.searchData.results = '';

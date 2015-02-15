@@ -36,7 +36,7 @@ DAT.Globe = function(container, opts) {
       target = { x: Math.PI*3/2, y: Math.PI / 6.0 },
       targetOnDown = { x: 0, y: 0 };
 
-  var distance = 100000, distanceTarget = 100000;
+  var distance = 100000, distanceTarget = 800;
   var padding = 40;
   var PI_HALF = Math.PI / 2;
 
@@ -46,9 +46,8 @@ DAT.Globe = function(container, opts) {
     container.style.font = '13px/20px Arial, sans-serif';
 
     var shader, uniforms, material;
-
-    w = 500;
-    h = 500;
+    w = container.clientWidth;
+    h = container.clientWidth;
 
     camera = new THREE.PerspectiveCamera(30, w / h, 1, 10000);
     camera.position.z = distance;
@@ -346,6 +345,9 @@ DAT.Globe = function(container, opts) {
   }
 
   function render() {
+    w = container.clientWidth;
+    h = container.clientWidth;
+    renderer.setSize(w, h);
     zoom(curZoomSpeed);
     rotation.x += (target.x - rotation.x) * 0.1;
     rotation.y += (target.y - rotation.y) * 0.1;

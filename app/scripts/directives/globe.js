@@ -9,8 +9,7 @@
 angular.module('weatherApp')
   .directive('globe',['$http', '$timeout',function ($http,$timeout) {
     return {
-      template: '<div id="globe-container"></div>',
-      restrict: 'E',
+      restrict: 'A',
       link: function postLink(scope, element, attrs) {
             if(!Detector.webgl){
               Detector.addGetWebGLMessage();
