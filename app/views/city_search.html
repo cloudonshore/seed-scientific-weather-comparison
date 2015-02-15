@@ -1,0 +1,6 @@
+<div class="city-search-container">
+	<input type="text" ng-model="query" class="form-control" placeholder="Search for Cities"><span us-spinner="{radius:4, width:2, length: 5}" spinner-key='city-search-spinner'  class="city-search-spinner"></span>
+	<div class="city-search-results" ng-click="addCity(searchData.results.id)" ng-if="searchData.results" ng-class="{valid:validSearch}">
+		{{addText}} <span class="badge city-add-span" ng-if="validSearch">add</span>
+	</div>
+</div>

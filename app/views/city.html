@@ -1,0 +1,49 @@
+<div class="city-container" ng-click="focusCity()">
+	<div class="color-container" style="border-color: {{color}};">
+	<span class="city-title">{{data.cityData.name}}</span> 
+	<img src="http://openweathermap.org/img/w/{{data.cityData.weather[0].icon}}.png"  class="city-weather-icon"/>
+	
+		<div class="city-conditions">
+		  <div class="description-container">
+		    <div class="condition-description">
+		    Current Weather
+		    </div>
+		    <div class="discription-value">
+		    {{data.cityData.weather[0].description}}
+		    </div>
+		  </div>
+		  <div class="description-container">
+		    <div class="condition-description">
+		    Temperature
+		    </div>
+		    <div class="discription-value">
+		    {{data.cityData.main.temp | temp}}
+		    </div>
+		  </div>
+		  <div class="description-container">
+		    <div class="condition-description">
+		    Humidity
+		    </div>
+		    <div class="discription-value">
+		    {{data.cityData.main.humidity | humidity}}
+		    </div>
+		  </div>
+		  <div class="description-container">
+		    <div class="condition-description">
+		    Pressure
+		    </div>
+		    <div class="discription-value">
+		    {{data.cityData.main.pressure | pressure}}
+		    </div>
+		  </div>
+		  <div ng-if="data.history.length==0" class="description-container">
+		    <div class="condition-description">
+		    </div>
+		    <div class="discription-value">
+		    <span class="badge" >no history data</span>
+		    </div>
+		  </div>
+		</div> 	
+			
+	</div>
+</div>

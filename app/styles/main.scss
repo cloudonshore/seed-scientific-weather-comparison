@@ -1,0 +1,234 @@
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+
+  .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+.svg-container {
+	width: 100%;
+	height: 600px;
+	position: relative;
+}
+.main-container {
+	width: 80%;
+	min-width: 1520px;
+	margin: 0px auto;
+}
+
+.main-container {
+@media screen and (min-width: 1520px){
+	width: 95%;
+	min-width: 1520px;
+	}
+	min-width:1200px;
+	margin: 0px auto;
+}
+
+
+
+.grid-container {
+	display: table;
+}
+.grid-inner {
+	display: table-cell;
+}
+
+/* CITY LIST STYLES */
+.city-list-grid-inner {
+	vertical-align: top;
+	width: 300px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.city-list-container {
+	border: 1px solid #333;
+	vertical-align: top;
+}
+
+/* CITY STYLES */
+.city-container {
+	border: 1px solid #333;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	position: relative;
+	cursor: pointer;
+}
+.color-container {
+	border-width: 4px;
+	border-style: solid;
+	border-radius: 5px;
+	padding: 5px;
+}
+.city-title {
+	font-size: 19px;
+}
+
+.city-weather-icon {
+	position: absolute;
+	right: 5px;
+	top: 2px;
+}
+.description-container {
+	margin: 8px 0px;
+}
+.condition-description {
+	display: inline-block;
+	font-weight: bold;
+	width: 45%;
+	text-align: right;
+}
+.discription-value {
+	display: inline-block;
+	padding-left: 10px;
+}
+/*d3bars styles*/
+.graph-switch {
+	display: inline;
+	float: right;
+}
+.graph-switch > li {
+	cursor: pointer;
+}
+.graph-title {
+	display: inline-block;
+	font-size: 27px;
+	font-weight: 200;
+}
+.graph-spinner {
+	position: absolute;
+	left: 50%;
+	top: 45%;	
+}
+
+
+/*CITY SEARCH STYLES*/
+.city-search-spinner {
+	position: absolute;
+	right: 19px;
+	top: 17px;
+}
+.city-search-container {
+	position: relative;
+}
+.city-search-results {
+	padding: 5px;
+}
+.city-search-results.valid {
+	cursor: pointer;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	&:hover { 
+	  background-color: #efefef;
+	}
+}
+ .city-search-results:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.city-add-span {
+	float: right;
+}
+
+
+/* D3 STYLES */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/* GLOBE STYLES */
+.globe-grid-inner {
+	width: 504px;
+	border: 1px solid #333;
+	border-radius: 5px;
+}
+
+
+
