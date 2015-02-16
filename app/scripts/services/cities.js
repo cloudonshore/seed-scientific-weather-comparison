@@ -33,7 +33,7 @@ angular.module('weatherApp')
 	          {
 	            if([5128581,2643743].indexOf(city.id) >=0)
 	            {
-	            promise = $http.get('../scripts/json/'+city.id+'-'+that.historyRange+'.json')
+	            promise = $http.get('scripts/json/'+city.id+'-'+that.historyRange+'.json')
 	                   .then(function(res){
 	                      console.log(res);
 	                      city.history = res.data;  
