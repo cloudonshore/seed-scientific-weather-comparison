@@ -9,6 +9,7 @@
   * D3.js
   * Three.js
   * bootstrap
+  * chardinStepJs (my own modification of chardinjs that allows for multi-step overlays)
 
 ## Process 
 

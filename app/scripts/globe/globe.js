@@ -184,11 +184,11 @@ DAT.Globe = function(container, opts) {
             }));
       } else {
         if (this._baseGeometry.morphTargets.length < 8) {
-          console.log('t l',this._baseGeometry.morphTargets.length);
+          //console.log('t l',this._baseGeometry.morphTargets.length);
           var padding = 8-this._baseGeometry.morphTargets.length;
-          console.log('padding', padding);
+          //console.log('padding', padding);
           for(var i=0; i<=padding; i++) {
-            console.log('padding',i);
+          //  console.log('padding',i);
             this._baseGeometry.morphTargets.push({'name': 'morphPadding'+i, vertices: this._baseGeometry.vertices});
           }
         }
@@ -237,7 +237,7 @@ DAT.Globe = function(container, opts) {
 		var x = r * Math.sin(phi) * Math.cos(theta);
 		var y = r * Math.cos(phi);
 		var z = r * Math.sin(phi) * Math.sin(theta);
-   console.log(x,y,z);
+   //console.log(x,y,z);
    var spriteMaterial = new THREE.SpriteMaterial( { map: THREE.ImageUtils.loadTexture(image), useScreenCoordinates: false } );
    var sprite = new THREE.Sprite( spriteMaterial );
    sprite.position.set( x,y,z );

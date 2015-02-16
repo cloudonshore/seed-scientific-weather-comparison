@@ -13,6 +13,7 @@ angular.module('weatherApp')
     this.colors = {} //used to store d3 colors generated in d3Bars for use in cityList
     this.cities = [{id:5128581},{id:2643743}];
     this.historyRange = 1;
+    that.graphSet = false;
     this.initializeCityData = function(){
        errorHandler.errors.hasError = false;
        var graphPromises = [];
@@ -35,7 +36,7 @@ angular.module('weatherApp')
 	            {
 	            promise = $http.get('scripts/json/'+city.id+'-'+that.historyRange+'.json')
 	                   .then(function(res){
-	                      console.log(res);
+	        
 	                      city.history = res.data;  
 	                      usSpinnerService.stop('graph-spinner');         
 	                    });
@@ -86,6 +87,7 @@ angular.module('weatherApp')
        $q.all(graphPromises).then(function() {
             $rootScope.$broadcast('graph-set');
             usSpinnerService.stop('graph-spinner');
+            that.graphSet = true;
          });
        $q.all(cityPromises).then(function() {
             $rootScope.$broadcast('city-set'); 
@@ -114,6 +116,7 @@ angular.module('weatherApp')
       angular.forEach(that.cities,function(city,key){
          delete city.history;
        });
+       that.graphSet = false;
     };
 
   }]);

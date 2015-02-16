@@ -11,7 +11,6 @@ angular.module('weatherApp')
     return {
       restrict: 'A',
       link: function postLink(scope) {
-            console.log(window.Detector);
             if(window.Detector && !window.Detector.webgl){
               window.Detector.addGetWebGLMessage();
             } else {
