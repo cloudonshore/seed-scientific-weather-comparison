@@ -9,8 +9,17 @@ $application-body-height: 600px;
   padding: 0.2em 0;
 }
 
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 body {
   padding: 0;
+  color: #555;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -23,7 +32,6 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 
   /* Make the masthead heading the same height as the navigation */
@@ -57,13 +65,34 @@ body {
   }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
+/* NAVIGATION STYLES */
+.nav-container {
+  width: 98%;
+  margin: 0px auto;	
+}
+.nav-d3bars-container {
+	width: 65%;
+	display: inline-block;
+}
+.nav-globe-container {
+	display: inline-block;
+	width: 33%;
+	vertical-align: top;
+}
+.nav-city-list-grid-inner {
+	width: 300px;
+}
+.navbar-title {
+	float: left;
+	height: 50px;
+	padding: 15px 15px 15px 10px;
+	font-size: 20px;
+	line-height: 20px;
+	color: #777;
+}
+.nav-cell {
+	border-left: 1px solid #e7e7e7;
+	height: 100%;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -81,7 +110,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -165,7 +194,6 @@ body {
 }
 .graph-switch {
 	display: inline;
-	float: right;
 }
 .graph-switch > li {
 	cursor: pointer;
@@ -198,11 +226,11 @@ body {
 	background-color: #fff;
 	z-index: 10;
 	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 .city-search-results.valid {
 	cursor: pointer;
-	border: 1px solid #ccc;
-	border-radius: 5px;
 	&:hover { 
 	  background-color: #efefef;
 	}
@@ -221,10 +249,12 @@ body {
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #555;
   shape-rendering: crispEdges;
 }
-
+text {
+	fill: #555;
+}
 /* GLOBE STYLES */
 .globe-grid-inner {
 	width: 504px;

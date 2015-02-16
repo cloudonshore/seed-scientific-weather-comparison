@@ -12,6 +12,7 @@ angular.module('weatherApp')
       templateUrl: '../views/city_list.html',
       restrict: 'E',
       link: function postLink(scope) {
+         scope.cities = cities.cities;
          scope.$on('city-set',function(){
            scope.cities = cities.cities;
          });

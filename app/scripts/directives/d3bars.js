@@ -14,26 +14,20 @@ angular.module('weatherApp')
       link: function postLink(scope, element,attrs) {
          scope.cityHistory = cities.cityHistory;
          scope.colors = {};
-         var svgContainer =  element.children()[2];
+         var svgContainer =  element.children()[1];
          var margin = parseInt(attrs.margin) || 20;
              
          var svg = d3.select(svgContainer)
                      .append('svg')
                      .style('width', '100%');
                      
-         scope.data = [
-                     {name: 'Greg', score: 98},
-                     {name: 'Ari', score: 96},
-                     {name: 'Q', score: 75},
-                     {name: 'Loser', score: 48}
-         ];
          
          window.onresize = function() {
            scope.$apply();
          };
          
          scope.activeGraph = 'temp';
-         scope.setActiveGraph = function(val){
+         scope.setActiveGraph = function(val){ //Used to toggle between temp, humidity, and pressure views
            scope.activeGraph = val;
            render();
          };
@@ -45,7 +39,7 @@ angular.module('weatherApp')
          }, function() {
            if(!_.isEmpty(cities.cities) && graphSet)
            {
-              render();
+              render(); //re-render on window resize
            }
          });
 
@@ -97,9 +91,9 @@ angular.module('weatherApp')
            var xAxis = d3.svg.axis()
                .scale(xScale)
                .orient('bottom')
-               .tickValues(d3.range(xMin, xMax, 40000))
+            //   .tickValues(d3.range(xMin, xMax, 40000)) //40000 is used for 5 day history data
+               .tickValues(d3.range(xMin, xMax, 8000)) //40000 is used for 5 day history data
                .tickFormat('');
-               //.tickFormat(function(d) { return d3.time.format('%m/%d %H:%M')(new Date(d*1000)); });
            var yAxis = d3.svg.axis()
                .scale(yScale)
                .orient('right')
@@ -148,7 +142,7 @@ angular.module('weatherApp')
             		.append('tspan')
             		.attr('x', 0)
             //		.attr('dx', '-1em')
-            		.attr('dy', function (d, i) { return (i==0?'.6em':'1em'); })
+            		.attr('dy', function (d, i) { return (i===0?'.6em':'1em'); })
             		.text(String);
             		
             		

@@ -11,12 +11,14 @@ angular.module('weatherApp')
   .controller('MainCtrl',['$scope','cities','errorHandler','$routeParams', function ($scope,cities,errorHandler,$routeParams) {
     if($routeParams.static)
     {
-      cities.initializeCityDataStatic();
+      cities.static = true;
       $scope.static = true;
     }
     else {
-    	cities.initializeCityData();
+    	cities.static = false;
+    	$scope.static = false;
     }
+    cities.initializeCityData();
     
     $scope.errors = errorHandler.errors;
   }]);

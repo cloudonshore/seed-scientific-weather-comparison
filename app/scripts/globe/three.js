@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 // File:src/Three.js
 
 /**

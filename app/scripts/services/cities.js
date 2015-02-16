@@ -13,7 +13,7 @@ angular.module('weatherApp')
     this.colors = {} //used to store d3 colors generated in d3Bars for use in cityList
     this.cities = [{id:5128581},{id:2643743}];
     this.initializeCityData = function(){
-      
+       errorHandler.errors.hasError = false;
        var graphPromises = [];
        var cityPromises = [];
        var d = new Date();
@@ -24,18 +24,39 @@ angular.module('weatherApp')
        angular.forEach(that.cities,function(city){
           if(!city.history)
           {
-            /* old url: 
-	           short url: 'http://api.openweathermap.org/data/2.5/history/city?id='+city.id+'&type=hour&APPID=b8dd231935128177b587fcf565d4711f&callback=JSON_CALLBACK' */
+            /* old url: 'http://api.openweathermap.org/data/2.5/history/city?id='+city.id+'&type=hour&start='+startTime+'&end='+endTime+'&APPID=b8dd231935128177b587fcf565d4711'
+	           short url:  */
 	          usSpinnerService.spin('graph-spinner');
-	          promise = $http.jsonp('http://api.openweathermap.org/data/2.5/history/city?id='+city.id+'&type=hour&start='+startTime+'&end='+endTime+'&APPID=b8dd231935128177b587fcf565d4711f&callback=JSON_CALLBACK').
-	          success(function(data) {
-	           // console.log(data);
-	            city.history = data.list;
-	          }).
-	          error(function () {
-	            errorHandler.displayError();
-	          });
-	          graphPromises.push(promise);
+	          if(that.static)
+	          {
+	            if([5128581,2643743].indexOf(city.id) >=0)
+	            {
+	            promise = $http.get('../scripts/json/'+city.id+'.json')
+	                   .then(function(res){
+	                      console.log(res);
+	                      city.history = res.data;  
+	                      usSpinnerService.stop('graph-spinner');         
+	                    });
+	            graphPromises.push(promise);
+	           }
+	           else {
+	           	city.history = [];
+	           }
+	          }
+	          else {
+	           // promise = $http.jsonp('http://api.openweathermap.org/data/2.5/history/city?id='+city.id+'&type=hour&start='+startTime+'&end='+endTime+'&APPID=b8dd231935128177b587fcf565d4711').
+	          	promise = $http.jsonp('http://api.openweathermap.org/data/2.5/history/city?id='+city.id+'&type=hour&APPID=b8dd231935128177b587fcf565d4711f&callback=JSON_CALLBACK').
+	          	success(function(data) {
+	          	 // console.log(data);
+	          	  city.history = data.list;
+	          	}).
+	          	error(function (result) {
+	          	  
+	          	  errorHandler.displayError(result);
+	          	});
+	          	graphPromises.push(promise);
+	          }
+
           }
           if(!city.cityData)
           {
@@ -58,7 +79,12 @@ angular.module('weatherApp')
             usSpinnerService.stop('graph-spinner');
          });
        $q.all(cityPromises).then(function() {
-            $rootScope.$broadcast('city-set');         });
+            $rootScope.$broadcast('city-set'); 
+       });
+       if(cityPromises.length===0) //when change from live data to static data, no promises are created, but the city data must still be set in the citylist by this broadcast
+       {
+         $rootScope.$broadcast('city-set'); 
+       }
     };
     
     

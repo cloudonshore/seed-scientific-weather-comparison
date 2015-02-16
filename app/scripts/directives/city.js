@@ -13,6 +13,7 @@ angular.module('weatherApp')
       restrict: 'E',
       scope: {data:'='},
       link: function postLink(scope) {
+        scope.color = colors.colorList[scope.data.id];
         scope.$on('color-set',function(){
           scope.color = colors.colorList[scope.data.id];
         });

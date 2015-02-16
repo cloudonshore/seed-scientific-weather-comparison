@@ -10,7 +10,8 @@
 angular.module('weatherApp')
   .service('errorHandler', function () {
     this.errors = {hasError:false,errorMessage:'There was a problem connecting to the OpenWeatherMap API'};
-    this.displayError = function(){
+    this.displayError = function(errorResult){
+      this.errors.result = errorResult;
       this.errors.hasError = true; 
       console.log('error!');
     };
