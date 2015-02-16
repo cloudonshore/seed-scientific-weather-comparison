@@ -8,7 +8,7 @@
  * Controller of the weatherApp
  */
 angular.module('weatherApp')
-  .controller('MainCtrl',['$scope','cities','errorHandler','$routeParams', function ($scope,cities,errorHandler,$routeParams) {
+  .controller('MainCtrl',['$scope','cities','errorHandler','$routeParams','$document', function ($scope,cities,errorHandler,$routeParams,$document) {
     if($routeParams.static)
     {
       cities.static = true;
@@ -18,7 +18,12 @@ angular.module('weatherApp')
     	cities.static = false;
     	$scope.static = false;
     }
+    cities.resetCityData();
     cities.initializeCityData();
     
     $scope.errors = errorHandler.errors;
+    
+    $scope.launchChardin = function(){
+      angular.element($document[0].body).chardinStepJs('start');
+    };
   }]);

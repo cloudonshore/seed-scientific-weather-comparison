@@ -1,4 +1,4 @@
-<div class="city-container" ng-click="focusCity()">
+<div class="city-container city{{data.id}}" ng-click="focusCity()">
 	<div class="color-container" style="border-color: {{color}};">
 	<span class="city-title">{{data.cityData.name}}</span> 
 	<img src="http://openweathermap.org/img/w/{{data.cityData.weather[0].icon}}.png"  class="city-weather-icon"/>

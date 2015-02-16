@@ -14,7 +14,7 @@ angular.module('weatherApp')
       link: function postLink(scope, element,attrs) {
          scope.cityHistory = cities.cityHistory;
          scope.colors = {};
-         var svgContainer =  element.children()[1];
+         var svgContainer =  element.children()[2];
          var margin = parseInt(attrs.margin) || 20;
              
          var svg = d3.select(svgContainer)
@@ -30,6 +30,13 @@ angular.module('weatherApp')
          scope.setActiveGraph = function(val){ //Used to toggle between temp, humidity, and pressure views
            scope.activeGraph = val;
            render();
+         };
+         scope.historyRange = cities.historyRange;
+         scope.setHistoryRange = function(val){ //Used to toggle between temp, humidity, and pressure views
+           scope.historyRange = val;
+           cities.historyRange = val;
+           cities.resetHistoryData();
+           cities.initializeCityData();
          };
          
          var graphSet = false;
@@ -87,12 +94,14 @@ angular.module('weatherApp')
            // set the height based on the calculations above
            svg.attr('height', height + 40);
            
+           var xAxisScaleDivider = (cities.historyRange===1?8000:40000);
+           
            // set the axis 
            var xAxis = d3.svg.axis()
                .scale(xScale)
                .orient('bottom')
             //   .tickValues(d3.range(xMin, xMax, 40000)) //40000 is used for 5 day history data
-               .tickValues(d3.range(xMin, xMax, 8000)) //40000 is used for 5 day history data
+               .tickValues(d3.range(xMin, xMax, xAxisScaleDivider)) //40000 is used for 5 day history data
                .tickFormat('');
            var yAxis = d3.svg.axis()
                .scale(yScale)

@@ -10,7 +10,7 @@
  */
 angular
   .module('weatherApp', [
-    'ngRoute','angularSpinner'
+    'ngRoute','angularSpinner', 'duScroll'
   ])
   .config(function ($routeProvider) {
     $routeProvider

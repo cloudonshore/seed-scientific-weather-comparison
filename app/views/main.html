@@ -1,3 +1,31 @@
+<div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="nav-container">
+         
+            <div class="grid-container sub-nav-container">
+            	<div class="grid-inner nav-city-list-grid-inner nav-cell">
+            	    <span class="navbar-title" >Compare Weather by City</span>
+            	</div>
+            	<div class="grid-inner" style="width: auto;">
+            	  <div class="nav-d3bars-container nav-cell">
+            	     <span class="navbar-title" >Weather History</span>
+  
+  	                 <ul class="nav navbar-nav nav-static-live">
+  	                   <li ng-class="{active:!static}"><a href="#/">Live data</a></li>
+  	                   <li ng-class="{active:static}"><a ng-href="#/static">Static data</a></li>
+  	                 </ul>
+  	          
+            	  </div>
+            	  <div class="nav-globe-container nav-cell">
+            	   <span class="navbar-title" >Weather Globe</span>
+            	  </div>
+            	</div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="main-container">
 <div ng-if="errors.hasError" class="alert alert-danger">Open weather api is failing to return history data, <a href="#/static">click here to view the site with hardcoded history data</a> </div>
 <div ng-if="static" class="alert alert-info" style="margin-bottom: 7px;">History data is hard coded for New York and London, <a href="/#/">click here to return to live history data</a> </div>
 <div class="grid-container" style="width: 100%;">
@@ -8,9 +36,17 @@
 	  <div class="d3bars-container">
 	  <d3-bars></d3-bars>
 	  </div>
-	  <div id="globe-container" globe>
+	  <div id="globe-container" globe data-intro="Globe spins to that city's latitude and longitude." data-position="left" data-step="1">
 	  </div>
 	</div>
 	
 	
+</div>
+ </div>
+
+
+<div class="footer">
+  <div class="container footer-container">
+<a class="floodlink blanklink" ng-click="launchChardin()">instructions</a> <a class="floodlink" href="https://github.com/cloudonshore/seed-scientific-weather-comparison/blob/master/README.md">github</a> sam walker
+  </div>
 </div>
