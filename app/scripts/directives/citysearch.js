@@ -9,7 +9,7 @@
 angular.module('weatherApp')
   .directive('citySearch',['citySearch', '$timeout','cities',function (citySearch,$timeout,cities) {
     return {
-      templateUrl: '../views/city_search.html',
+      templateUrl: 'views/city_search.html',
       restrict: 'E',
       link: function postLink(scope) {
         scope.searchData = citySearch.searchData;

@@ -2,7 +2,7 @@
 	<div class="color-container" style="border-color: {{color}};">
 	<span class="city-title">{{data.cityData.name}}</span> 
 	<img src="http://openweathermap.org/img/w/{{data.cityData.weather[0].icon}}.png"  class="city-weather-icon"/>
-	
+	<span ng-click="deleteCity()" class="glyphicon glyphicon-remove city-remove-icon"></span>
 		<div class="city-conditions">
 		  <div class="description-container">
 		    <div class="condition-description">

@@ -7,9 +7,9 @@
  * # d3Bars
  */
 angular.module('weatherApp')
-  .directive('d3Bars',['cities','d3','$window','$filter','colors','$rootScope','_',function (cities,d3,$window,$filter,colors,$rootScope,_) {
+  .directive('d3Bars',['cities','d3','$window','$filter','colors','$rootScope',function (cities,d3,$window,$filter,colors,$rootScope) {
     return {
-      templateUrl: '../views/d3_bars.html',
+      templateUrl: 'views/d3_bars.html',
       restrict: 'E',
       link: function postLink(scope, element,attrs) {
          scope.cityHistory = cities.cityHistory;
@@ -37,7 +37,7 @@ angular.module('weatherApp')
          scope.$watch(function() {
            return document.querySelector('.main-container').clientWidth;
          }, function() {
-           if(!_.isEmpty(cities.cities) && graphSet)
+           if(!window._.isEmpty(cities.cities) && graphSet)
            {
               render(); //re-render on window resize
            }

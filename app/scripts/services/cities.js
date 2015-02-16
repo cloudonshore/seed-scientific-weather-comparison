@@ -87,7 +87,14 @@ angular.module('weatherApp')
        }
     };
     
-    
+    this.deleteCity = function(id){
+      that.cities = that.cities.filter(function( obj ) {
+          return obj.id !== id;
+      });
+      $rootScope.$broadcast('city-set');
+      $rootScope.$broadcast('graph-set');
+      $rootScope.$broadcast('remove-city-sprite',{id:id});
+    };
    
       this.initializeCityDataStatic = function(){
            $http.get('../scripts/json/cities.json')

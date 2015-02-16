@@ -59,9 +59,9 @@ DAT.Globe = function(container, opts) {
 
     var geometry = new THREE.SphereGeometry(200, 40, 30);
 
-    var earthSurfaceMap = THREE.ImageUtils.loadTexture('../images/earthmap.jpg');
-    var earthBumpMap = THREE.ImageUtils.loadTexture('../images/earthbump.jpg', {}, function(){});
-    var earthSpecularMap    = THREE.ImageUtils.loadTexture('../images/earthspec.jpg')
+    var earthSurfaceMap = THREE.ImageUtils.loadTexture('images/earthmap.jpg');
+    var earthBumpMap = THREE.ImageUtils.loadTexture('images/earthbump.jpg', {}, function(){});
+    var earthSpecularMap    = THREE.ImageUtils.loadTexture('images/earthspec.jpg')
     material = new THREE.MeshPhongMaterial({map:earthSurfaceMap,
     																				bumpMap:earthBumpMap,
     																				bumpScale:12,
@@ -77,7 +77,7 @@ DAT.Globe = function(container, opts) {
     
     
     var cloudGeometry = new THREE.SphereGeometry(208, 40, 30);
-    var cloudMap = THREE.ImageUtils.loadTexture('../images/earthClouds.png');
+    var cloudMap = THREE.ImageUtils.loadTexture('images/earthClouds.png');
     var cloudMaterial  = new THREE.MeshPhongMaterial({
       map     		: cloudMap,
       side        : THREE.DoubleSide,
@@ -89,21 +89,11 @@ DAT.Globe = function(container, opts) {
     mesh.add(cloudMesh);
     
     scene.add(mesh);
-//    sprite = new THREE.Sprite( { 
-//    	map: THREE.ImageUtils.loadTexture('../images/10n.png'), 
-//    	useScreenCoordinates: false, 
-//    	affectedByDistance: false,
-//    	opacity: 1,
-//    	color: 0xffffff//,
-//    	//scale:{x:.95,y:.95,z:.95}
-//    } );
-    
 
     
     var directionalLight = new THREE.DirectionalLight( 0xcccccc, 1 );
     directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
-//    
     var ambientLight = new THREE.AmbientLight( 0xffffff );
     scene.add(ambientLight);
 
@@ -237,7 +227,7 @@ DAT.Globe = function(container, opts) {
     subgeo.merge(point.geometry, point.matrix);
   }
   
-	function addSprite( id, lat, lng, panTo ) {
+	function addSprite(id, image, lat, lng, panTo ) {
 
 		var phi = (90 - lat) * Math.PI / 180;
 		var theta = (180 - lng) * Math.PI / 180;
@@ -248,12 +238,18 @@ DAT.Globe = function(container, opts) {
 		var y = r * Math.cos(phi);
 		var z = r * Math.sin(phi) * Math.sin(theta);
    console.log(x,y,z);
-   var spriteMaterial = new THREE.SpriteMaterial( { map: THREE.ImageUtils.loadTexture(id), useScreenCoordinates: false } );
+   var spriteMaterial = new THREE.SpriteMaterial( { map: THREE.ImageUtils.loadTexture(image), useScreenCoordinates: false } );
    var sprite = new THREE.Sprite( spriteMaterial );
    sprite.position.set( x,y,z );
    sprite.scale.set( 50, 50, 1.0 ); // imageWidth, imageHeight
+   sprite.name = id;
    scene.add( sprite );
 
+	}
+	function removeSprite(id)
+	{ 
+	  var selectedObject = scene.getObjectByName(id);
+	      scene.remove( selectedObject );
 	}
 	function moveToPoint( lat, lng ) {
 
@@ -397,6 +393,7 @@ DAT.Globe = function(container, opts) {
     this._time = t;
   });
   this.addSprite = addSprite;
+  this.removeSprite = removeSprite;
   this.addData = addData;
   this.createPoints = createPoints;
   this.renderer = renderer;

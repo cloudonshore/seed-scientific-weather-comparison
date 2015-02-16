@@ -1,1 +1,0 @@
-"use strict";angular.module("weatherApp").directive("citySearch",function(){return{templateUrl:"../views/city_search.html",restrict:"E",link:function t(e,i,r){i.text("this is the citySearch directive")}}});

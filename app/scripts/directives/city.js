@@ -9,7 +9,7 @@
 angular.module('weatherApp')
   .directive('city',['colors','$rootScope', function (colors,$rootScope) {
     return {
-      templateUrl: '../views/city.html',
+      templateUrl: 'views/city.html',
       restrict: 'E',
       scope: {data:'='},
       link: function postLink(scope) {
@@ -19,6 +19,9 @@ angular.module('weatherApp')
         });
         scope.focusCity = function(){
           $rootScope.$broadcast('globe-focus-city',scope.data.cityData);
+        };
+        scope.deleteCity = function(){
+        scope.$emit('delete-city',{id:scope.data.id});
         };
       }
     };

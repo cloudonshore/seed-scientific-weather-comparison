@@ -1,7 +1,7 @@
 // bower:scss
 // endbower
 
-$application-body-height: 600px;
+$application-body-height: 550px;
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -22,6 +22,20 @@ body {
   color: #555;
 }
 
+.floodlink {
+	text-decoration: none;
+	color: $text-color;
+	vertical-align: top;
+	//box-shadow: $shadow;
+	padding: 2px 3px 3px 3px;
+	background-color: white;
+	&:hover {
+	  position: relative;
+	  z-index: 500;
+	  text-decoration: none;
+	  color: $text-color;
+	}
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -94,6 +108,9 @@ body {
 	border-left: 1px solid #e7e7e7;
 	height: 100%;
 }
+.navbar {
+	margin-bottom: 5px !important;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -110,7 +127,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 20px;
+    //margin-bottom: 20px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -171,8 +188,12 @@ body {
 
 .city-weather-icon {
 	position: absolute;
-	right: 5px;
-	top: 2px;
+	top: 0px;
+/*	right: 5px;
+	top: 2px;*/
+}
+.city-remove-icon {
+	float: right;
 }
 .description-container {
 	margin: 8px 0px;
